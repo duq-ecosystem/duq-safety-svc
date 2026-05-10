@@ -29,6 +29,9 @@ RUN pip install --no-cache-dir .
 # ============================================================================
 FROM python:3.11-slim AS runtime
 
+# Install curl for healthcheck
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
 # Security: run as non-root user
 RUN groupadd -r safety && useradd -r -g safety safety
 
