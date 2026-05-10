@@ -16,7 +16,7 @@ dependencies = [
     "pydantic-settings>=2.2.0",
     "httpx>=0.27.0",
     "loguru>=0.7.2",
-    "duq-agent-core>=0.1.0",
+    "duq-agent-core @ git+https://github.com/duq-ecosystem/duq-agent-core.git@master",
 ]
 
 [project.optional-dependencies]
