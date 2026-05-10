@@ -120,7 +120,11 @@ class LLMAdapter:
         return ""
 
     async def _call_openrouter(self, prompt: str, model: str) -> str:
-        """Call OpenRouter API (OpenAI-compatible)."""
+        """Call OpenRouter API (OpenAI-compatible).
+
+        Model format: provider/model (e.g., "openai/gpt-4o-mini", "anthropic/claude-haiku-4-5")
+        Claude models without prefix get "anthropic/" added automatically.
+        """
         if not self._settings.openrouter_api_key:
             raise LLMAdapterError("OpenRouter API key not configured")
 

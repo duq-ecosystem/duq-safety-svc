@@ -42,11 +42,13 @@ class Settings(BaseSettings):
     # LLM Configuration
     anthropic_api_key: str | None = Field(default=None, alias="ANTHROPIC_API_KEY")
     openrouter_api_key: str | None = Field(default=None, alias="OPENROUTER_API_KEY")
+    # Safety uses DIFFERENT provider/model than main agent by default
+    # This ensures safety checks work even if main provider has issues
     llm_default_provider: Literal["anthropic", "openrouter"] = Field(
-        default="anthropic", alias="LLM_DEFAULT_PROVIDER"
+        default="openrouter", alias="LLM_DEFAULT_PROVIDER"
     )
     llm_safety_model: str = Field(
-        default="claude-haiku-4-5-20251001", alias="LLM_SAFETY_MODEL"
+        default="openai/gpt-4o-mini", alias="LLM_SAFETY_MODEL"
     )
     use_llm_fallback: bool = Field(default=True, alias="USE_LLM_FALLBACK")
 
