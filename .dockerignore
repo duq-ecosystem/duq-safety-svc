@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+.eggs
+dist
+build
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.coverage
+htmlcov
+
+# Virtual environments
+.venv
+venv
+ENV
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Environment files (secrets)
+.env
+.env.*
+!.env.example
+
+# Tests (not needed in production image)
+tests/
+
+# Documentation
+*.md
+docs/
+
+# Other
+*.log
+*.tmp

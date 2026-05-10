@@ -1,0 +1,28 @@
+# DUQ Safety Service - Docker Compose for local development
+version: "3.9"
+
+services:
+  safety:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: duq-safety-svc
+    ports:
+      - "8083:8083"
+    environment:
+      - SAFETY_HOST=0.0.0.0
+      - SAFETY_PORT=8083
+      - LOG_LEVEL=DEBUG
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+      - LLM_DEFAULT_PROVIDER=${LLM_DEFAULT_PROVIDER:-anthropic}
+      - LLM_SAFETY_MODEL=${LLM_SAFETY_MODEL:-claude-haiku-4-5-20251001}
+      - USE_LLM_FALLBACK=${USE_LLM_FALLBACK:-true}
+      - ALERT_WEBHOOK_URL=${ALERT_WEBHOOK_URL:-}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8083/health').raise_for_status()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
